@@ -52,7 +52,7 @@
                         <id>validate</id>
                         <phase>validate</phase>
                         <goals>
-                            <goal>NOcheck</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -87,7 +87,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.7</minimum>
+                                            <minimum>0.9</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
