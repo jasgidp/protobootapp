@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       - mvn compile
-      - mvn test
+      #- mvn test
       - mvn install
       # - command
   post_build:
