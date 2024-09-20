@@ -52,7 +52,7 @@
                         <id>validate</id>
                         <phase>validate</phase>
                         <goals>
-                            <goal>UNcheck</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
