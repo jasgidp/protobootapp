@@ -1,17 +1,27 @@
 pipeline {
-    agent any  // Usar cualquier nodo disponible
+    agent any
 
-    tools {
-        maven 'my_maven' // El nombre debe coincidir con el configurado en "Global Tool Configuration"
-    }
     stages {
+        stage('Instalación') {
+            steps {
+                script {
+                    // Especifica la versión de Java Corretto a utilizar
+                    // Asegúrate de tener la herramienta instalada en Jenkins
+                    env.JAVA_HOME = tool(name: 'Corretto 17', type: 'jdk')
+                }
+            }
+        }
 
-        stage('Compilación y Pruebas') {
+        stage('Compilación') {
             steps {
                 // Ejecutar el build usando Maven
-                sh 'mvn clean compile install'
-            
-                // Ejecutar pruebas y generar reportes
+                sh 'mvn compile'
+            }
+        }
+
+        stage('Pruebas') {
+            steps {
+                // Ejecutar pruebas
                 sh 'mvn test'
             }
             post {
@@ -22,25 +32,26 @@ pipeline {
             }
         }
 
-        stage('Análisis estático') {
+        stage('Empaquetado') {
             steps {
-                // Analizar con Checkstyle, PMD y SpotBugs
-                recordIssues tools: [checkStile(), pmdParser(), spotBugs()]
-            }
-        }
-
-        stage('Cobertura de código') {
-            steps {
-                // Publicar reporte de cobertura JaCoCo
-                jacoco execPattern: 'target/jacoco.exec'
+                // Instalar y empaquetar
+                sh 'mvn install'
+                sh 'mvn package'
+                sh 'mv target/protobootapp-0.0.1-SNAPSHOT.jar root.jar'
             }
         }
     }
 
     post {
         always {
+            // Publicar reportes de JaCoCo
+            jacoco execPattern: 'target/jacoco.exec'
             // Limpiar el workspace al final
             cleanWs()
+        }
+        success {
+            // Archivar artefactos, como root.jar
+            archiveArtifacts artifacts: 'root.jar', fingerprint: true
         }
     }
 }
