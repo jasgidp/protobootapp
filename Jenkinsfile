@@ -5,16 +5,6 @@ pipeline {
         maven 'my_maven' // El nombre debe coincidir con el configurado en "Global Tool Configuration"
     }
     stages {
-
-        stage('Compilación') {
-            steps {
-                // Ejecutar el build usando Maven
-                sh 'mvn clean compile install'
-            
-                // Ejecutar pruebas y generar reportes
-               
-            }
-        }
                 stage('Pruebas') {
             steps {
                 // Ejecutar pruebas y generar reportes
@@ -27,6 +17,16 @@ pipeline {
                 }
             }
         }
+        stage('Compilación') {
+            steps {
+                // Ejecutar el build usando Maven
+                sh 'mvn clean compile install'
+            
+                // Ejecutar pruebas y generar reportes
+               
+            }
+        }
+
         stage('Análisis estático') {
             steps {
                 // Analizar con Checkstyle, PMD y SpotBugs
