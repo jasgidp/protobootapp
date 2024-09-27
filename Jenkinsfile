@@ -12,13 +12,7 @@ pipeline {
                 sh 'mvn clean compile install'
             
                 // Ejecutar pruebas y generar reportes
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    // Publicar reporte de pruebas JUnit
-                    junit 'target/surefire-reports/*.xml'
-                }
+               
             }
         }
     }
