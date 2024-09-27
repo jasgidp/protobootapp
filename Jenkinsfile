@@ -5,7 +5,28 @@ pipeline {
         maven 'my_maven' // El nombre debe coincidir con el configurado en "Global Tool Configuration"
     }
     stages {
-                stage('Pruebas') {
+
+        stage('Compilación') {
+            steps {
+                // Ejecutar el build usando Maven
+                sh 'mvn clean compile '
+            
+                // Ejecutar pruebas y generar reportes
+               
+            }
+        }
+         
+
+        stage('Installation') {
+            steps {
+                // Ejecutar el build usando Maven
+                sh 'mvn install'
+            
+                // Ejecutar pruebas y generar reportes
+               
+            }
+        }
+                        stage('Pruebas') {
             steps {
                 // Ejecutar pruebas y generar reportes
                 sh 'mvn test'
@@ -15,15 +36,6 @@ pipeline {
                     // Publicar reporte de pruebas JUnit
                     junit 'target/surefire-reports/*.xml'
                 }
-            }
-        }
-        stage('Compilación') {
-            steps {
-                // Ejecutar el build usando Maven
-                sh 'mvn clean compile install'
-            
-                // Ejecutar pruebas y generar reportes
-               
             }
         }
 
