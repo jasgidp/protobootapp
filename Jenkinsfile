@@ -2,12 +2,6 @@ pipeline {
     agent any  // Usar cualquier nodo disponible
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Clonar el código desde Git
-                git branch: 'main', url: 'https://github.com/jasgidp/protobootapp.git'
-            }
-        }
 
         stage('Compilación') {
             steps {
