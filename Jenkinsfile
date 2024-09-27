@@ -1,22 +1,17 @@
 pipeline {
-    agent any
- tools {
+    agent any  // Usar cualquier nodo disponible
+
+    tools {
         maven 'my_maven' // El nombre debe coincidir con el configurado en "Global Tool Configuration"
     }
-
     stages {
-        
 
-        stage('Compilación') {
+        stage('Compilación y Pruebas') {
             steps {
                 // Ejecutar el build usando Maven
-                sh 'mvn compile'
-            }
-        }
-
-        stage('Pruebas') {
-            steps {
-                // Ejecutar pruebas
+                sh 'mvn clean compile install'
+            
+                // Ejecutar pruebas y generar reportes
                 sh 'mvn test'
             }
             post {
@@ -27,26 +22,10 @@ pipeline {
             }
         }
 
-        stage('Empaquetado') {
-            steps {
-                // Instalar y empaquetar
-                sh 'mvn install'
-                sh 'mvn package'
-                sh 'mv target/protobootapp-0.0.1-SNAPSHOT.jar root.jar'
-            }
-        }
-    }
-
     post {
         always {
-            // Publicar reportes de JaCoCo
-            jacoco execPattern: 'target/jacoco.exec'
             // Limpiar el workspace al final
             cleanWs()
-        }
-        success {
-            // Archivar artefactos, como root.jar
-            archiveArtifacts artifacts: 'root.jar', fingerprint: true
         }
     }
 }
