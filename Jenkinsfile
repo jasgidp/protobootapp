@@ -33,6 +33,12 @@ pipeline {
                 recordIssues tools: [checkStyle(), pmdParser(), spotBugs()]
             }
         }
+        stage('Cobertura de código') {
+            steps {
+                // Publicar reporte de cobertura JaCoCo
+                jacoco execPattern: 'target/jacoco.exec'
+            }
+        }
     }
     post {
         always {
