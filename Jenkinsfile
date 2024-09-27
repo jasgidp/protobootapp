@@ -1,16 +1,11 @@
 pipeline {
     agent any
+ tools {
+        maven 'my_maven' // El nombre debe coincidir con el configurado en "Global Tool Configuration"
+    }
 
     stages {
-        stage('Instalación') {
-            steps {
-                script {
-                    // Especifica la versión de Java Corretto a utilizar
-                    // Asegúrate de tener la herramienta instalada en Jenkins
-                    env.JAVA_HOME = tool(name: 'Corretto 17', type: 'jdk')
-                }
-            }
-        }
+        
 
         stage('Compilación') {
             steps {
