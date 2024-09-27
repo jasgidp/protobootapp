@@ -6,15 +6,11 @@ pipeline {
     }
     stages {
 
-        stage('Compilación') {
+        stage('Compilación y Pruebas') {
             steps {
                 // Ejecutar el build usando Maven
                 sh 'mvn clean compile install'
-            }
-        }
-
-        stage('Pruebas') {
-            steps {
+            
                 // Ejecutar pruebas y generar reportes
                 sh 'mvn test'
             }
