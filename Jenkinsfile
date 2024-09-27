@@ -6,7 +6,7 @@ pipeline {
     }
     stages {
 
-        stage('Compilación y Pruebas') {
+        stage('Compilación') {
             steps {
                 // Ejecutar el build usando Maven
                 sh 'mvn clean compile install'
