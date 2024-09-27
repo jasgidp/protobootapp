@@ -1,6 +1,9 @@
 pipeline {
     agent any  // Usar cualquier nodo disponible
 
+    tools {
+        maven 'my_maven' // El nombre debe coincidir con el configurado en "Global Tool Configuration"
+    }
     stages {
 
         stage('Compilación') {
