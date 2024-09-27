@@ -27,6 +27,12 @@ pipeline {
                 }
             }
         }
+        stage('Análisis estático') {
+            steps {
+                // Analizar con Checkstyle, PMD y SpotBugs
+                recordIssues tools: [checkStyle(), pmdParser(), spotBugs()]
+            }
+        }
     }
     post {
         always {
