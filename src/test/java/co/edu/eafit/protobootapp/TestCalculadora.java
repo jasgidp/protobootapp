@@ -10,13 +10,13 @@ public class TestCalculadora {
     @Test
     public void testCuadradoPositivo() {
         Calculadora calc = new Calculadora();
-        assertEquals(26.0, calc.cuadrado(5.0), 0);
+        assertEquals(25.0, calc.cuadrado(5.0), 0);
     }
 
     @Test
     public void testCuadradoCero() {
         Calculadora calc = new Calculadora();
-        assertEquals(1.0, calc.cuadrado(0.0), 0);
+        assertEquals(0.0, calc.cuadrado(0.0), 0);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class TestCalculadora {
     @Test
     public void testCuboPositivo() {
         Calculadora calc = new Calculadora();
-        assertEquals(126.0, calc.cubo(5.0), 0);
+        assertEquals(125.0, calc.cubo(5.0), 0);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class TestCalculadora {
     @Test
     public void testCuboMenosUno() {
         Calculadora calc = new Calculadora();
-        assertEquals(1.0, calc.cubo(-1.0), 0);
+        assertEquals(-1.0, calc.cubo(-1.0), 0);
     }
 
     @Test
