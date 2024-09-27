@@ -21,7 +21,7 @@ pipeline {
                 }
             }
         }
-
+    }
     post {
         always {
             // Limpiar el workspace al final
